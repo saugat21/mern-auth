@@ -14,6 +14,11 @@ connectDb();
 
 const app = express();
 
+//using req.body data and form data
+app.use(express.json());
+//using form data
+app.use(express.urlencoded({ extended: true }));
+
 //using routes
 app.use('/api/users', userRoutes);
 
