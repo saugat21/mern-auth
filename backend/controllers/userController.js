@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
+import genetateToken from "../utils/genetateToken.js";
 
 //access= public  route= POST /api/users/auth   == Login
 const authUser = asyncHandler(async (req, res) => {
@@ -27,6 +28,8 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
+        //generating token
+        genetateToken(res, user._id);
         res.status(201).json({
             _id: user._id,
             name: user.name,
