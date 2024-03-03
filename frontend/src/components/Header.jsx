@@ -8,7 +8,9 @@ function Header() {
         <div className="container">
           <div className="d-flex justify-content-between align-items-center ">
             <div>
-              <h1 className="m-0 text-light">Mern Auth</h1>
+              <Link to={"/"} className="m-0 text-light text-decoration-none">
+                <h1>Mern Auth</h1>
+              </Link>
             </div>
 
             <div className="text-end ">
