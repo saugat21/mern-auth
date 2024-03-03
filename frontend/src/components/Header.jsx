@@ -11,11 +11,11 @@ function Header() {
               <h1 className="m-0 text-light">Mern Auth</h1>
             </div>
 
-            <div className="text-end gap-2">
+            <div className="text-end ">
               <Link
                 to={"/login"}
                 type="button"
-                className="btn btn-outline-light me-2"
+                className="btn btn-outline-light me-3"
               >
                 Login
               </Link>
