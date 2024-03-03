@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js'
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDb from "./config/db.js";
+import cookieParser from "cookie-parser";
 
 //using dotenv variables
 dotenv.config();
@@ -19,6 +20,9 @@ const app = express();
 app.use(express.json());
 //using form data
 app.use(express.urlencoded({ extended: true }));
+
+//to use cookie-parser
+app.use(cookieParser());
 
 //using routes
 app.use('/api/users', userRoutes);
