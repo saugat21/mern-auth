@@ -1,10 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../store/usersApiSlice";
+import { logout } from "../store/authSlice";
 
 function Header() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const [logoutApiCall] = useLogoutMutation();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <header className="p-3 text-bg-dark">
@@ -23,7 +38,7 @@ function Header() {
                     <button class="dropbtn">{userInfo.name}</button>
                     <div class="dropdown-content">
                       <Link to={"/profile"}>Profile</Link>
-                      <Link to={"/"}>Logout</Link>
+                      <Link onClick={logoutHandler}>Logout</Link>
                     </div>
                   </div>
                 </>
