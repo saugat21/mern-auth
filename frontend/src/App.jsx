@@ -22,6 +22,7 @@ function App() {
           <Route path="" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          {/* private routed end */}
         </Routes>
       </BrowserRouter>
     </>
