@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../store/usersApiSlice";
 import { setCredentials } from "../store/authSlice";
 import { toast } from "react-toastify";
+import Loader from "./Loader";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -64,6 +65,7 @@ function Login() {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
+          {isLoading && <Loader />}
           <button type="submit" className="btn btn-primary w-100 py-2">
             Sign in
           </button>
