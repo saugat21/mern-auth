@@ -19,7 +19,7 @@ function Register() {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <label for="floatingtext">Enter your Name</label>
+            <label htmlFor="floatingtext">Enter your Name</label>
           </div>
 
           <div className="form-floating mb-4">

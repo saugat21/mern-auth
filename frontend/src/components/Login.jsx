@@ -1,13 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../store/usersApiSlice";
+import { setCredentials } from "../store/authSlice";
+import { set } from "mongoose";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //aaba mutation bata login nikalne.... isLoading ra error already buildin hunxa.
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("form submitted");
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate("/");
+    } catch (err) {
+      console.log(err?.data?.message || err.error);
+    }
   };
   return (
     <>
@@ -40,7 +63,7 @@ function Login() {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-          <button className="btn btn-primary w-100 py-2" type="submit">
+          <button type="submit" className="btn btn-primary w-100 py-2">
             Sign in
           </button>
           <p className="mt-2 text-center">
